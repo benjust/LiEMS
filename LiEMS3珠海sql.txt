@@ -1,0 +1,182 @@
+朱惠敏 ZH0469
+
+钟云泰 ZH0311   --20120113284
+
+programNo="B1BUG00630" programName="费用报销"
+
+
+
+LiEMS31正式环境：
+ http://132.0.0.53:7001/Liems/xslt/index.jsp 
+ ZH0469/111111 
+ zh0063 
+table.getField("PRJ_NO").setCanNull(false);
+table.getField("PRJ_NO").setReadonly(true);
+
+sqlplus sys/sys as sysdba;
+drop user liems cascade; 
+create user liems identified by liems;
+grant dba to liems;
+quit;
+
+imp liems/liems file=D:\Dev\ZHPlant\database\Liems_20130401.dmp  fromuser=liems3  touser=liems commit=y ignore=y;
+
+imp liems/liems file=D:\Liems_20130401.dmp  fromuser=liems3  touser=liems commit=y ignore=y;
+
+=======================================================================
+
+sqlplus sys/sys as sysdba;
+drop user liems3 cascade; 
+create user liems3 identified by liems3;
+grant dba to liems3;
+
+create user oasbi identified by oasbi;
+create user maxprod identified by maxprod;
+create user zhpsjzn identified by zhpsjzn;
+create user xjgl identified by xjgl;
+
+ quit;
+
+CREATE TABLESPACE liems3
+DATAFILE 'D:\Oracle_SYS\product\10.2.0\oradata\orcl\liems301.dbf' SIZE 128M REUSE 
+AUTOEXTEND ON NEXT 1280K EXTENT MANAGEMENT LOCAL; 
+
+
+sqlplus sys/sys as sysdba;
+drop user tweam cascade; 
+create user tweam identified by tweam;
+grant dba to tweam;
+imp tweam/tweam file=D:\Dev\tweam\database\tweam.dmp  fromuser=tweam  touser=tweam commit=y ignore=y;
+
+
+imp liems3/liems3 file=D:\Dev\ZHPlant\database\Liems_20130401.dmp  fromuser=liems3  touser=liems3 commit=y ignore=y;
+
+exp liems3/luculent@LIEMSORCL file=D:\Dev_LiEMS31\Liems_20130916.dmp 
+
+sqlplus sys/sys as sysdba;
+drop user liems cascade; 
+create user liems identified by liems;
+grant dba to liems;
+
+imp liems/liems file=D:\Liems20130916.dmp  fromuser=liems3  touser=liems commit=y ignore=y;
+
+
+IMINDCDAT
+
+alter user liems3 account unlock;
+
+密码 1
+select *  from  utusrmst where usr_id='SYS';
+update utusrmst set usr_pwd='7f3200157a118247076e66494f60c384' where usr_id<>'SYS';
+
+update UTUSRMST set newusr_PWD='c272adb7f7c91b7f6edda30c5e0a15fe' where usr_id<>'SYS';
+commit;
+commit;
+
+
+select PRJ_EXA  from  PjPRJMST;
+
+select *  from dkfldmst where dictfld_no='13267'
+
+ select * from DKFLDMST where DICTTBL_ID=upper('exexrmst');
+
+
+GetVal("15639") 职别
+GetUpPosition(SumbUsr())  部长
+
+
+BEGIN   
+  DBMS_JOB.ISUBMIT(JOB=>21,WHAT=>'IMINDCTODO;',NEXT_DATE=>TO_DATE('2011-12-01:14:50:48',
+  'YYYY-MM-DD:HH24:MI:SS'),INTERVAL=>'sysdate+5/1440',NO_PARSE=>TRUE); 
+END;
+
+delete from liems3.ys_budcenter;
+delete from liems3.ys_buditem;
+delete from liems3.ys_budver;
+delete from liems3.ys_dbsynclst;
+delete from liems3.ys_dept;
+delete from liems3.ys_finbuditem;
+delete from liems3.ys_prjcenter;
+delete from liems3.ys_prjdetail;
+delete from liems3.ys_prjself;
+commit;
+
+update LIEMS3.YS_FINBUDITEM set fj_km = null where fj_km = cw_km_bm;
+update LIEMS3.YS_BUDITEM set fj_km_bm = null where km_bm = fj_km_bm;
+
+commit;
+
+
+Leadof("PreUsr()")
+
+费用报销   EXJJ201200981
+陈永福 (ZH0338) -》程国辉(ZH0298)
+ 
+
+陈永福 B1BUS00630.xml
+
+
+
+田东旭 (ZH0579 )  黄恒杰( ZH0470 )
+//===============================================================
+exexrmst 费用报销
+
+CST_NO 15337(报销部门=责任中心)
+流程:有分部
+!"GetVal("15337")".equals("420") && !"GetVal("15337")".equals("421") && !"GetVal("15337")".equals("422") && !"GetVal("15337")".equals("423") && !"GetVal("15337")".equals("561")
+无分部
+"GetVal("15337")".equals("420")||"GetVal("15337")".equals("421")||"GetVal("15337")".equals("422")||"GetVal("15337")".equals("423")||"GetVal("15337")".equals("561")
+
+流程：一般员工： GetVal("18350")==1  ----------------》
+
+
+sqlplus sys/sys as sysdba;xsrd
+drop user dcgl cascade; 
+create user dcgl identified by dcgl;
+ grant dba to dcgl;
+
+imp dcgl/dcgl file=D:\dcgl20120216.dmp  fromuser=dcgl  touser=dcgl commit=y ignore=y;
+
+exp dcgl/dcgl file=D:\dcgl20120202.dmp 
+
+
+drop user xsrd cascade; 
+drop user xjzl cascade; 
+drop user xjzl cascade; 
+drop user xdb cascade; 
+drop user eamtest cascade; 
+drop user bjdev cascade; 
+
+--数据字典，查找表名
+select * from dktblmst where dicttbl_sht like '%开%';
+
+
+sqlplus sys/sys as sysdba;
+create user liemst identified by liemst;
+grant dba to liemst;
+quit;
+ 
+
+imp liemst/liemst file=C:\Liems20120710.dmp  fromuser=liems3  touser=liemst commit=y ignore=y;
+
+发电量
+tab1_text14   tab1_text17  tab1_text18
+ 
+
+厂供电量
+tab1_text44 tab1_text47 tab1_text48
+
+sqlplus sys/sys as sysdba;
+drop user maxprod cascade; 
+create user maxprod identified by maxprod;
+grant dba to maxprod;
+quit;
+
+
+sqlplus sys/sys as sysdba;
+drop user dcgl cascade; 
+create user dcgl identified by dcgl;
+grant dba to dcgl;
+quit;
+
+imp dcgl/dcgl file=c:\dcgl_20100917.dmp  fromuser=dcgl  touser=dcgl commit=y ignore=y;
